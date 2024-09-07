@@ -1,5 +1,8 @@
 using api.Data;
+using api.Interfaces;
+using api.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,11 +11,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//manually added lines
-builder.Services.AddControllers();
-builder.Services.AddDbContext<ApplicationDBContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+builder.Services.AddControllers();   //manually added lines
+builder.Services.AddControllers().AddNewtonsoftJson(options => {
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});  // Manually added lines
+builder.Services.AddDbContext<ApplicationDBContext>(options => {     //manually added lines
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));  //manually added lines
 });
+
+builder.Services.AddScoped<IStockRepository, StockRepository>();   //manually added lines
+builder.Services.AddScoped<ICommentRepository, CommentRepository>(); //manually added lines
 
 var app = builder.Build();
 
@@ -25,7 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//manually added line
-app.MapControllers();
+
+app.MapControllers();   //manually added line
  
 app.Run();
