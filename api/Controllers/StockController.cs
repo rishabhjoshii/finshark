@@ -35,7 +35,7 @@ namespace api.Controllers
             return Ok(stockDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             // var stock = await _context.Stocks.FindAsync(id);
@@ -60,7 +60,7 @@ namespace api.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockRequestDto updateDto)
         {
             // var stockModel = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
