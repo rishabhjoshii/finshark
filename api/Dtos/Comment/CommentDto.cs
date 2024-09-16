@@ -15,6 +15,8 @@ namespace api.Dtos.Comment
 
         public DateTime CreatedOn { get; set; } = DateTime.Now;
 
+        public string CreatedBy { get; set; } = string.Empty;
+
         //[ForeignKey(name:"Stock")]
         public int? StockId { get; set; } 
     

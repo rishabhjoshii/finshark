@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace api.Models{
 
+    [Table("Comments")]
     public class Comment
     {
         public int Id { get; set; }
@@ -18,6 +19,9 @@ namespace api.Models{
     
         //Navigation
         public Stock? Stock { get; set; }
+
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 
 }

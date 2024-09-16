@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace api.Models{
 
+    [Table("Stocks")]
     public class Stock
     {
         // [Key]
@@ -23,6 +24,8 @@ namespace api.Models{
         public long MarketCap { get; set; }
 
         public List<Comment> Comments { get; set; } = new List<Comment>(); 
+
+        public List<Portfolio> portfolios { get; set; } = new List<Portfolio>();
 
 
     }
